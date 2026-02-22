@@ -1,0 +1,21 @@
+services:
+  wedding-postgres:
+    image: postgres:16
+    container_name: wedding-postgres
+    environment:
+      POSTGRES_DB: wedding_invite
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      TZ: Asia/Tokyo
+    ports:
+      - "15432:5432"
+    volumes:
+      - wedding_pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres -d wedding_invite"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+volumes:
+  wedding_pgdata:
