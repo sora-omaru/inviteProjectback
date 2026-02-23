@@ -1,32 +1,33 @@
 package com.omaru.wedding.controller;
 
-import com.omaru.wedding.dto.InvitePatchRequest;
-import com.omaru.wedding.entity.InviteEntity;
-import com.omaru.wedding.repository.InviteRepository;
+import com.omaru.wedding.dto.InviteResponseDto;
+import com.omaru.wedding.dto.InviteUpdateRequestDto;
+import com.omaru.wedding.view.InviteView;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.server.ResponseStatusException;
+import service.InviteService;
 
 @RestController
 @RequestMapping("/api/v1/invites")
 @RequiredArgsConstructor
 
 public class InviteController {
-    private final InviteRepository inviteRepository;
 
+    private final InviteService inviteService;
+
+    //GET
+    @GetMapping("/{token}")
+    public InviteResponseDto get(@PathVariable String token) {
+        return InviteView.toDto(inviteService.getByTokenOrThrow(token));
+    }
+
+    //PATCH
     @PatchMapping("/{token}")
-    public InviteEntity patchInvite(@PathVariable String token, @Valid @RequestBody InvitePatchRequest req) {
-        InviteEntity entity = inviteRepository.findByInviteToken(token).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));//不明なtokenの場合は404を出す
+    public InviteResponseDto patch(@PathVariable String token, @Valid @RequestBody InviteUpdateRequestDto request) {
 
-        if (req.attendance() != null)
-            entity.setAttendance(req.attendance());
-
-        if (req.message() != null)
-            entity.setMessage(req.message());
-
-        return inviteRepository.save(entity);
+        var updated = inviteService.update(token,request);
+        return InviteView.toDto(updated);
 
     }
 }
