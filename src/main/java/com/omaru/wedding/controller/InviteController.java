@@ -2,11 +2,12 @@ package com.omaru.wedding.controller;
 
 import com.omaru.wedding.dto.InviteResponseDto;
 import com.omaru.wedding.dto.InviteUpdateRequestDto;
+import com.omaru.wedding.service.InviteService;
 import com.omaru.wedding.view.InviteView;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
-import service.InviteService;
+
 
 @RestController
 @RequestMapping("/api/v1/invites")
