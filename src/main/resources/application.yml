@@ -13,6 +13,7 @@ spring:
       hibernate:
         jdbc:
           time_zone: UTC
+    open-in-view: false
   flyway:
     enabled: true
     locations: classpath:db/migration
@@ -26,7 +27,10 @@ management:
     logging:
       level:
         org.springframework.security: DEBUG
-
+admin:
+  basic:
+    username: ${ADMIN_BASIC_USERNAME:admin}
+    password: ${ADMIN_BASIC_PASSWORD:change-me}
 security:
   user:
     name: admin
