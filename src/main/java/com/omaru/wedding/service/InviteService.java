@@ -21,6 +21,7 @@ public class InviteService {
     public InviteEntity update(String token, InviteUpdateRequestDto request) {
         var entity = getByTokenOrThrow(token);
         entity.setAttendance(request.attendance());
+        entity.setName(request.name());
         entity.setCompanionsText(request.companionsText());
 
         return inviteRepository.save(entity);

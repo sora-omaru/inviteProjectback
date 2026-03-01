@@ -5,6 +5,7 @@ import jakarta.validation.constraints.Size;
 
 public record InviteUpdateRequestDto(
         @NotNull Short attendance,
-        @Size(max = 200) String companionsText
+        @Size(max = 200) String companionsText,
+        @Size(max = 100) String name
 ) {
 }

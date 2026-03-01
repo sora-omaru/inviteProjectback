@@ -40,6 +40,8 @@ public class SecurityConfig {
     SecurityFilterChain invitesChain(HttpSecurity http) throws Exception {
         return http
                 .securityMatcher("/api/v1/invites/**")
+                .cors(cors -> {
+                })
                 .csrf(csrf -> csrf.disable())
                 .authorizeHttpRequests(auth -> auth.anyRequest().permitAll())
                 .build();
@@ -50,6 +52,8 @@ public class SecurityConfig {
     SecurityFilterChain adminChain(HttpSecurity http) throws Exception {
         return http
                 .securityMatcher("/api/v1/admin/**")
+                .cors(cors -> {
+                })
                 .csrf(csrf -> csrf.disable())
                 .authorizeHttpRequests(auth -> auth.anyRequest().hasRole("ADMIN"))
                 .httpBasic(Customizer.withDefaults())
@@ -61,6 +65,8 @@ public class SecurityConfig {
     SecurityFilterChain denyAllChain(HttpSecurity http) throws Exception {
         return http
                 .securityMatcher("/**")
+                .cors(cors -> {
+                })
                 .csrf(csrf -> csrf.disable())
                 .authorizeHttpRequests(auth -> auth.anyRequest().denyAll())
                 .build();

@@ -1,13 +1,16 @@
 package com.omaru.wedding.controller;
 
+import com.omaru.wedding.dto.AdminInviteListItemDto;
 import com.omaru.wedding.entity.InviteEntity;
 import com.omaru.wedding.repository.InviteRepository;
+import com.omaru.wedding.service.AdminInviteService;
 import com.omaru.wedding.util.TokenGenerator;
 import lombok.RequiredArgsConstructor;
 import org.springframework.dao.DataIntegrityViolationException;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 //管理者用API
 @RestController
@@ -15,6 +18,15 @@ import org.springframework.web.bind.annotation.RestController;
 @RequiredArgsConstructor
 public class AdminInviteController {
     private final InviteRepository inviteRepository;
+
+    private final AdminInviteService adminInviteService;
+
+    @GetMapping
+    @ResponseStatus(HttpStatus.OK)
+    public List<AdminInviteListItemDto> getAllInvites() {
+        return adminInviteService.getAllInvites();
+    }
+
 
     @PostMapping
     public InviteEntity create() {
