@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 import java.net.URI;
 import java.util.List;
+
 //404/400/500 が全部 ProblemDetail になる。
 @RestControllerAdvice
 public class GlobalExceptionHandler {
@@ -82,6 +83,24 @@ public class GlobalExceptionHandler {
 
         return pd;
     }
+    //アレルギー情報のエラーハンドリングを受ける
+
+    @ExceptionHandler(InvalidAllergySelectionException.class)
+    public ProblemDetail handleInvalidAllergySelection(
+            InvalidAllergySelectionException ex,
+            HttpServletRequest req
+    ) {
+        ProblemDetail pd = ProblemDetail.forStatus(HttpStatus.BAD_REQUEST);
+        pd.setType(URI.create("https://example.com/problems/invalid-allergy-selection"));
+        pd.setTitle("Invalid allergy selection");
+        pd.setDetail(ex.getMessage());
+        pd.setInstance(URI.create(req.getRequestURI()));
+
+        pd.setProperty("errorCode", "INVALID_ALLERGY_SELECTION");
+        pd.setProperty("traceId", traceIdOrNull());
+
+        return pd;
+    }
 
     private static ValidationErrorDto toValidationError(FieldError fe) {
         return new ValidationErrorDto(fe.getField(), fe.getDefaultMessage());
@@ -91,5 +110,6 @@ public class GlobalExceptionHandler {
         return org.slf4j.MDC.get("traceId");
     }
 
-    public record ValidationErrorDto(String field, String message) {}
+    public record ValidationErrorDto(String field, String message) {
+    }
 }
