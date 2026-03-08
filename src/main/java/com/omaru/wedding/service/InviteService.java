@@ -23,7 +23,6 @@ public class InviteService {
         entity.setAttendance(request.attendance());
         entity.setName(request.name());
         entity.setCompanionsText(request.companionsText());
-
         return inviteRepository.save(entity);
     }
 }

@@ -7,7 +7,7 @@ public record AdminInviteListItemDto(
         String name,
         short attendance,
         String companionsText,
-//            String allergiesText,
+        String allergiesText,
         String kidsText,
 //            String messageText,
         OffsetDateTime createdAt,

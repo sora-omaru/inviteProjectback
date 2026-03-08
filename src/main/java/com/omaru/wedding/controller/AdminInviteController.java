@@ -35,7 +35,7 @@ public class AdminInviteController {
             InviteEntity invite = new InviteEntity();
             invite.setInviteToken(TokenGenerator.generate());
             invite.setAttendance((short) 0);
-            //todo DTO化
+
             try {
                 return inviteRepository.save(invite);
             } catch (DataIntegrityViolationException e) {

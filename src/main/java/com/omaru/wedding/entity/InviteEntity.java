@@ -28,6 +28,9 @@ public class InviteEntity {
     @Column(name = "companions_text", columnDefinition = "text")
     private String companionsText;
 
+    @Column(name = "allergies_text", columnDefinition = "text")
+    private String allergiesText;
+
     @Column(name = "kids_text",columnDefinition = "text")
     private String kidsText;
 

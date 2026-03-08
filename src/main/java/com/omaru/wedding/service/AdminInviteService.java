@@ -24,9 +24,12 @@ public class AdminInviteService {
                         entity.getName(),
                         entity.getAttendance(),
                         entity.getCompanionsText(),
+                        entity.getAllergiesText(),
                         entity.getKidsText(),
                         entity.getCreatedAt(),
                         entity.getUpdatedAt()
+
+
                 ))
                 .toList();
     }
