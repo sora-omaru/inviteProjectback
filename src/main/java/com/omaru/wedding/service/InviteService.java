@@ -36,7 +36,7 @@ public class InviteService {
         ensureValidAllergies(allergiesList);
 
         //カンマ区切りに変換
-        var allergiesText = String.join(", ", allergiesList);
+        var allergiesText = String.join(",", allergiesList);
         entity.setAllergiesText(allergiesText);
 
 
