@@ -1,11 +1,11 @@
 server:
-  port: 8080
+  port: ${PORT:8080}
 
 spring:
   datasource:
-    url: jdbc:postgresql://localhost:15432/wedding_invite
-    username: postgres
-    password: postgres
+    url: ${SPRING_DATASOURCE_URL}
+    username: ${SPRING_DATASOURCE_USERNAME}
+    password: ${SPRING_DATASOURCE_PASSWORD}
   jpa:
     hibernate:
       ddl-auto: validate
@@ -24,15 +24,11 @@ management:
       exposure:
         include: health,info
 
-    logging:
-      level:
-        org.springframework.security: DEBUG
+logging:
+  level:
+    org.springframework.security: DEBUG
+
 admin:
   basic:
     username: ${ADMIN_BASIC_USERNAME:admin}
     password: ${ADMIN_BASIC_PASSWORD:change-me}
-security:
-  user:
-    name: admin
-    password: admin
-
