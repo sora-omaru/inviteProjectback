@@ -16,7 +16,10 @@ public class CorsConfig {
         CorsConfiguration config = new CorsConfiguration();
 
         // フロントのURL（Next dev）
-        config.setAllowedOrigins(List.of("http://localhost:3000"));
+        config.setAllowedOrigins(List.of(
+                "http://localhost:3000",
+                "https://wedding-invite-front.vercel.app"
+        ));
 
         // 必要なHTTPメソッド（OPTIONSはプリフライトで必須）
         config.setAllowedMethods(List.of("GET", "PATCH", "POST", "OPTIONS"));
