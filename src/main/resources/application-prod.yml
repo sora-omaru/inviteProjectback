@@ -3,3 +3,8 @@ spring:
     url: ${SPRING_DATASOURCE_URL}
     username: ${SPRING_DATASOURCE_USERNAME}
     password: ${SPRING_DATASOURCE_PASSWORD}
+
+    admin:
+      basic:
+        username: ${ADMIN_BASIC_USERNAME}
+        password: ${ADMIN_BASIC_PASSWORD}
